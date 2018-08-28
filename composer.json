@@ -1,0 +1,46 @@
+{
+  "name": "webdevetc/webdevetc",
+  "keywords": [
+    "laravel",
+    "package",
+    "contact",
+    "contact form",
+    "form",
+    "email"
+  ],
+  "description": "Simple contact form to quickly add to your laravel project",
+  "license": "MIT",
+  "support": {
+    "docs": "https://webdevetc.com/"
+  },
+  "authors": [
+    {
+      "name": "WebDevEtc",
+      "homepage": "https://webdevetc.com/",
+      "role": "developer",
+      "email": "packages@webdevetc.com"
+    }
+  ],
+  "require": {
+    "laravelcollective/html":"^5.6",
+    "illuminate/database": "~5.5.0|~5.6.0",
+    "illuminate/support": "~5.5.0|~5.6.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "WebDevEtc\\ContactEtc\\": "src"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "WebDevEtc\\ContactEtc\\ContactEtcServiceProvider"
+      ],
+      "aliases": {
+      }
+    }
+  }
+}
