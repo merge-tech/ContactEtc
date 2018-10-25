@@ -47,7 +47,7 @@ class ContactEtcMail extends Mailable
      */
     public function build()
     {
-        $message = $this->markdown('contactetc.contact_form_template',
+        $message = $this->markdown('contactetc::contact_form_template',
             ['submitted_data' => $this->submitted_data,
                 'fields' => $this->contact_form->fields(),
                 'contact_form' => $this->contact_form]
