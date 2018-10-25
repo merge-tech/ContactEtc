@@ -13,7 +13,7 @@
 
 ## installation guide
 
-Please visit (the laravel contact form documentation here)[https://webdevetc.com/contactetc/]. The installation process only takes a couple of minutes, but there are a few things to be aware of.
+Please visit [the laravel contact form documentation here](https://webdevetc.com/contactetc/). The installation process only takes a couple of minutes, but there are a few things to be aware of.
 
 ## issues, security issues
 
