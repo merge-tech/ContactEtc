@@ -29,8 +29,8 @@
     }
   ],
   "require": {
-    "illuminate/database": "~5.5.0|~5.6.0",
-    "illuminate/support": "~5.5.0|~5.6.0",
+    "illuminate/database": "~5.5.0|~5.6.0|5.7.*",
+    "illuminate/support": "~5.5.0|~5.6.0|5.7.*",
     "buzz/laravel-google-captcha": "2.*"
 
   },
