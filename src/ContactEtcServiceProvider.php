@@ -29,6 +29,7 @@ class ContactEtcServiceProvider extends ServiceProvider
     {
         $this->loadRoutes();
         $this->publishesFiles();
+        $this->loadViewsFrom(__DIR__ . "/Views/contactetc", 'contactetc');
     }
 
     /**
@@ -39,7 +40,6 @@ class ContactEtcServiceProvider extends ServiceProvider
     public function register()
     {
         $this->makeBindings();
-        $this->loadViewsFrom(__DIR__ . "/Views/contactetc", 'contactetc');
         $this->commands([
             MakeContactEtcForm::class
         ]);
