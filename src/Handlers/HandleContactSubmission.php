@@ -1,0 +1,73 @@
+<?php namespace WebDevEtc\ContactEtc\Handlers;
+
+use Illuminate\Contracts\Mail\Mailer;
+use WebDevEtc\ContactEtc\ContactForm;
+use WebDevEtc\ContactEtc\Mail\ContactEtcMail;
+
+/**
+ * Class HandleContactSubmission
+ * @package WebDevEtc\ContactEtc\Handlers
+ */
+class HandleContactSubmission implements HandlerInterface
+{
+    /**
+     * Currently unused, but may be used in the future.
+     *
+     * should hold an array of string error messages.
+     *
+     * @var array
+     */
+    protected $errors = [];
+
+    /**
+     * Process what needs to happen with $submitted_data
+     *
+     * @todo: check for errors from Mailer object when we try to ->send() it, and report those back to the user
+     * @param Mailer $mail - the mailer obj
+     * @param array $submitted_data - basically \Request::all()
+     * @param array $contactFormDetails - details about the form (form fields, where to send the email to, etc)
+     * @param bool $clear_errors - if true, it will clear any current errors.
+     * @return bool
+     */
+    public function handleContactSubmission(Mailer $mail, array $submitted_data, ContactForm $contactFormDetails, $clear_errors = true)
+    {
+
+        $this->clearErrors($clear_errors);
+
+        // we don't actually use the errors array in this implementation.
+        // but maybe it will be useful for other uses in the future.
+        // any  validation errors should have been caught in the request rules
+        // in the future we should check for any errors from the Mail object
+
+        if (count($this->errors)) {
+            return false;
+        }
+
+        // send the email...
+        $mail->to($contactFormDetails->send_to)
+            ->send(new ContactEtcMail($submitted_data, $contactFormDetails));
+        return true;
+
+
+    }
+
+    /**
+     * return an array of any errors that occurred.
+     * Currently not actually used, but might be used in future.
+     * @return array
+     */
+    public function getErrors()
+    {
+        return $this->errors;
+    }
+
+    /**
+     * @param $clear_errors
+     */
+    protected function clearErrors($clear_errors)
+    {
+        if ($clear_errors) {
+            $this->errors = [];
+        }
+    }
+}
