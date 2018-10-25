@@ -30,7 +30,8 @@ class MakeContactEtcForm extends GeneratorCommand
     public function handle()
     {
         if (!is_array(config("contactetc"))){
-            return $this->error("The config file contactetc.php does not exist, or is not returning an array. Have you done the vendor:publish command? Please see the docs on https://webdevetc.com/contactetc");
+            $this->error("The config file contactetc.php does not exist, or is not returning an array. Have you done the vendor:publish command? Please see the docs on https://webdevetc.com/contactetc");
+            return;
         }
 
         // create the file:
@@ -41,7 +42,6 @@ class MakeContactEtcForm extends GeneratorCommand
             // let's output some help/info
 
             // get the file that was created.
-            // todo: confirm if this is always correct!
             $name = $this->qualifyClass($this->getNameInput());
             $path = $this->getPath($name);
             $filename = basename($path);

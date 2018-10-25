@@ -38,6 +38,7 @@ class ContactEtcSubmittedRequest extends FormRequest
      */
     public function rules(ContactFormConfigurator $contactFormConfigurator)
     {
+        // $this->contactFormId should be set by the route (the             ->defaults('contactFormId', $contact_field_group_name); part)
         $contactForm = $contactFormConfigurator->getContactForm($this->contactFormId);
         // now we have the details (including where to send email to, and details about the fields for this contact form)
         // so lets generate the rules...

@@ -30,10 +30,13 @@ class ContactFormConfigurator
     public static function createNew($load_configs=false)
     {
 
+        /** @var array $configs */
         $configs = self::getArrayOfConfigFilepaths($load_configs);
 
+        /** @var ContactFormConfigurator $configurator */
         $configurator = new self;
 
+        /** @var string $contact_form_filepath */
         foreach ($configs as $contact_form_filepath) {
             self::checkConfigFileExists($contact_form_filepath);
             $configurator->addContactForm(require($contact_form_filepath));
@@ -58,7 +61,7 @@ class ContactFormConfigurator
     /**
      * Normally this will load config("contactetc.contact_forms"); which should be an array.
      * It checks if it is an array, and if not it will tell the user they probably have to run
-     * php arisan vendor:publish
+     * php artisan vendor:publish
      *
      * @param $load_configs
      * @return array|\Illuminate\Config\Repository|mixed

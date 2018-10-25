@@ -159,8 +159,6 @@ abstract class BaseFieldType implements BaseFieldInterface
     /**
      *  Set the field name.
      *
-     * Useful for captcha fields where you can override this method to hard code a fixed field name
-     *
      * @param $field_name
      * @return $this
      */

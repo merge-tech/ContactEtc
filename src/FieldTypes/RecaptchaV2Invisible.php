@@ -25,11 +25,13 @@ class RecaptchaV2Invisible extends BaseFieldType
     /**
      * set the field name - this must be hard coded to work!
      * @param $field_name
+     * @return $this
      */
     public function setFieldName($field_name)
     {
         // this MUST be g-recaptcha-response
         $this->field_name = 'g-recaptcha-response';
+        return $this;
     }
 
     /**

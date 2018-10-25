@@ -100,15 +100,17 @@ return ContactForm::newContactForm("main_contact_form")
             // Just uncomment them and move it where you want
 
             // checkbox - useful if you want the user to agree to some terms and conditions.
-//                    Checkbox::newNamed("agree_to_terms","Agree to our terms?") //<input type='checkbox'>
-//                            ->required(),
+//                    Checkbox::newNamed("agree_to_terms")           //<input type='checkbox'>
+//                            ->setLabelName("Agree to our terms?")
+//                            ->markAsRequiredField(),
 
 
             // Do you want to use the invisible recaptcha from Google?
             // If so, please make sure that you have CAPTCHA_SITEKEY and CAPTCHA_SECRET set up in your .env (or in config/captcha.php)
             // and uncomment the next line
-//                    RecaptchaV2Invisible::spam("g-recaptcha-response") // do not change the field name!
-//                       ->labeled("Spam protection"), // probably not needed, as it should be invisible!
+//                    RecaptchaV2Invisible::spam()  // do not use newNamed with RecaptchaV2Invisible()
+//                       ->markAsRequiredField()
+//                       ->setLabelName("Spam protection"), // probably not needed, as it should be invisible!
 
         ]
 

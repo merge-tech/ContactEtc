@@ -1,4 +1,6 @@
-<?php namespace WebDevEtc\ContactEtc\FieldGenerator;
+<?php
+
+namespace WebDevEtc\ContactEtc\FieldGenerator;
 
 use WebDevEtc\ContactEtc\ContactFormConfigurator;
 use WebDevEtc\ContactEtc\ContactForm;
@@ -14,7 +16,7 @@ class GetContactFormFieldData implements FieldGeneratorInterface
     /**
      * Returns the requested ContactForm object
      *
-     * @param $contactFieldId
+     * @param $contact_form_name
      * @return ContactForm
      * @throws \Exception
      */

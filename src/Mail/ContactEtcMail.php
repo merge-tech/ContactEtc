@@ -47,6 +47,7 @@ class ContactEtcMail extends Mailable
      */
     public function build()
     {
+        /** @var Mailable $message */
         $message = $this->markdown('contactetc::contact_form_template',
             ['submitted_data' => $this->submitted_data,
                 'fields' => $this->contact_form->fields(),
@@ -64,7 +65,7 @@ class ContactEtcMail extends Mailable
      * @param $message
      * @return mixed
      */
-    protected function setupMessageHeaders($message)
+    protected function setupMessageHeaders(Mailable $message)
     {
         // build the from_email_address email and reply to email details...
         // this is a bit bulky, but it is quite simple...
@@ -106,13 +107,14 @@ class ContactEtcMail extends Mailable
         }
 
 
+
         // ok, now we have gone through everything, do we have a $from_email_address (and maybe a $from_name)?
         if ($from_email_address) {
             // set the from email address, and maybe $from_name if we have that info
             $message = $message->from($from_email_address, $from_name);
         }
 
-        // and do we have a $reply_to_email_address (and myabe a $reply_to_name)?
+        // and do we have a $reply_to_email_address (and maybe a $reply_to_name)?
         if ($reply_to_email_address) {
             // set the default 'reply to' in the email that will get sent to you once this form is submitted
             $message = $message->replyTo($reply_to_email_address, $reply_to_name);

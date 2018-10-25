@@ -21,7 +21,7 @@ use WebDevEtc\ContactEtc\FieldTypes\Textarea;
 
 
 
-return ContactForm::newContactForm("main_contact_form")
+return ContactForm::newContactForm("alt")
     ->sendTo("UPDATE_THIS_TO_SOMETHING@example.com")// what email address shall we send the contact form response to? (i.e. your email address)
     ->humanReadableFormName("Main Contact Form")// what is the name of this form?
 
@@ -43,7 +43,7 @@ return ContactForm::newContactForm("main_contact_form")
             Text::newNamed("your_name")// field name
             ->setLabelName("Your name")
                 ->markAsRequiredField()
-//                        ->setAsFromName()
+                ->setAsFromName()
                 ->setAsReplyToName(),
 
             Email::newNamed("email")
@@ -52,7 +52,7 @@ return ContactForm::newContactForm("main_contact_form")
                 ->markAsRequiredField()
                 ->max(200)// max length
                 ->min(4)// min length
-//                        ->setAsFromAddress()
+                        ->setAsFromAddress()
                 ->setAsReplyToAddress(),
 
 

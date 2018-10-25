@@ -4,7 +4,7 @@
 return [
 
 
-    'include_default_routes' => true, // should we load the routes.php file in /vendor/webdevetc/contactetc/src/routes.php? If false, you can just manually copy/paste them into your web.php (default: true)
+    'include_default_routes' => true, // should we automatically load the routes.php file in /vendor/webdevetc/contactetc/src/routes.php? default: true)
 
     'contact_us_slug' => "contact-us", // what should the default URL be.  (default: contact-us)
     // you can add more contact forms, but this is the default one. Only works if include_default_routes is true.
@@ -17,9 +17,9 @@ return [
              make sure to update this and include the config files.
              you can auto generate these files by running:
 
-             php artisan make:contactetcform MyContactForm
+             php artisan make:contactetcform MainContactForm
 
-            (and then edit the file in /app/ContactEtcForms)
+            (and then edit the file that was created in /app/ContactEtcForms/)
 
             */
 

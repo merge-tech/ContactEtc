@@ -1,4 +1,6 @@
-<?php namespace WebDevEtc\ContactEtc\FieldTypes;
+<?php
+
+namespace WebDevEtc\ContactEtc\FieldTypes;
 
 use Illuminate\Validation\Rule;
 
@@ -24,7 +26,6 @@ class Checkbox extends BaseFieldType
      */
     public function rules()
     {
-
         return [
             Rule::in('1'),
         ];

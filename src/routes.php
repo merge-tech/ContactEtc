@@ -11,7 +11,8 @@ Route::group([
     'middleware' => ['web'],
     'prefix' => config('contactetc.contact_us_slug', 'contact-us')],
     function () {
-        // default form:
+
+        // default form. You must have an item in /app/ContactEtcForms/ that has its form name set to ContactEtcServiceProvider::DEFAULT_CONTACT_FORM_KEY for this to work!
         $contact_field_group_name = ContactEtcServiceProvider::DEFAULT_CONTACT_FORM_KEY;
 
         // the contact form:
@@ -24,6 +25,8 @@ Route::group([
             ->name('contactetc.send.' . $contact_field_group_name)// contactetc.send.main_contact_form
             ->defaults('contactFormId', $contact_field_group_name);
 
+        // want to add more than one contact form? Don't edit this page! See the docs on https://webdevetc.com/contactetc!
+        // you can add as many as needed.
 });
 
 

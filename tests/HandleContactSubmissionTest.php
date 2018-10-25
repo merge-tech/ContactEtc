@@ -6,8 +6,6 @@ use WebDevEtc\ContactEtc\ContactFormConfigurator;
 use WebDevEtc\ContactEtc\ContactEtcServiceProvider;
 use WebDevEtc\ContactEtc\ContactForm;
 use WebDevEtc\ContactEtc\FieldTypes\Email;
-use WebDevEtc\ContactEtc\FieldTypes\Text;
-use WebDevEtc\ContactEtc\FieldTypes\Textarea;
 use WebDevEtc\ContactEtc\Handlers\HandleContactSubmission;
 
 class HandleContactSubmissionTest extends \Tests\TestCase

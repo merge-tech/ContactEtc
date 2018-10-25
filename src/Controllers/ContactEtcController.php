@@ -17,11 +17,11 @@ use WebDevEtc\ContactEtc\Requests\ContactEtcSubmittedRequest;
  */
 class ContactEtcController extends Controller
 {
-    /** @var  ContactForm */
+    /** @var  ContactForm - set via $this->getContactForm() */
     protected $contactForm;
 
     /**
-     * Show the contact form.
+     * Show the requested contact form.
      *
      * @param FieldGeneratorInterface $fieldGenerator
      * @param string $contact_form_name
@@ -31,6 +31,7 @@ class ContactEtcController extends Controller
     {
         $this->getContactForm($fieldGenerator, $contact_form_name);
 
+        // 'please fill out the form:'
         return view("contactetc::form", $this->contactForm->view_params['form_view_vars'])
             ->withFormUrl(route('contactetc.send.' . $contact_form_name))
             ->withContactFormDetails($this->contactForm)
@@ -55,37 +56,35 @@ class ContactEtcController extends Controller
 
         event(new ContactFormSubmitted($request->all(), $this->contactForm));
 
-        // handle the submission (i.e. send the email!)
         if (!$handler->handleContactSubmission($mail, $request->all(), $this->contactForm)) {
-            // there was an error...
             return $this->error($request, $handler);
         }
 
         event(new ContactFormSent($request->all(), $this->contactForm));
 
+        // 'thanks, we will get in touch soon!'
         return view("contactetc::sent", $this->contactForm->view_params['sent_view_vars']);
 
     }
 
     /**
+     * Send the ContactFormError event, and return a redirectResponse with the old input and any errors from the handler.
+     *
      * @param ContactEtcSubmittedRequest $request
      * @param HandlerInterface $handler
-     * @param $contactFormDetails
      * @return \Illuminate\Http\RedirectResponse
      */
     protected function error(ContactEtcSubmittedRequest $request, HandlerInterface $handler)
     {
-// uh oh, an error occurred
         event(new ContactFormError($request->all(), $this->contactForm, $handler->getErrors()));
-        return back()
-            ->withInput()
-            ->withErrors($handler->getErrors());
+
+        return back()->withInput()->withErrors($handler->getErrors());
     }
 
     /**
+     * Get the requested ContactForm and set it as a property  on $this.
      * @param FieldGeneratorInterface $fieldGenerator
      * @param string $contact_form_name
-     * @return mixed
      */
     protected function getContactForm(FieldGeneratorInterface $fieldGenerator, string $contact_form_name)
     {

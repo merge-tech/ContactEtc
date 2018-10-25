@@ -23,6 +23,8 @@ class FieldGeneratorTest extends \Tests\TestCase
         });
     }
 
+
+
     public function test_field_generator_returns_array()
     {
 

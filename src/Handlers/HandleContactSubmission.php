@@ -25,11 +25,11 @@ class HandleContactSubmission implements HandlerInterface
      * @todo: check for errors from Mailer object when we try to ->send() it, and report those back to the user
      * @param Mailer $mail - the mailer obj
      * @param array $submitted_data - basically \Request::all()
-     * @param array $contactFormDetails - details about the form (form fields, where to send the email to, etc)
+     * @param ContactForm $contact_form - details about the form (form fields, where to send the email to, etc)
      * @param bool $clear_errors - if true, it will clear any current errors.
-     * @return bool
+     * @return bool - false = error, true = success
      */
-    public function handleContactSubmission(Mailer $mail, array $submitted_data, ContactForm $contactFormDetails, $clear_errors = true)
+    public function handleContactSubmission(Mailer $mail, array $submitted_data, ContactForm $contact_form, $clear_errors = true)
     {
 
         $this->clearErrors($clear_errors);
@@ -44,11 +44,10 @@ class HandleContactSubmission implements HandlerInterface
         }
 
         // send the email...
-        $mail->to($contactFormDetails->send_to)
-            ->send(new ContactEtcMail($submitted_data, $contactFormDetails));
+        $mail->to($contact_form->send_to)
+            ->send(new ContactEtcMail($submitted_data, $contact_form));
+
         return true;
-
-
     }
 
     /**

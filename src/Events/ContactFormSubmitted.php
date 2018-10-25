@@ -14,7 +14,7 @@ class ContactFormSubmitted
     /** @var array */
     public $submitted_data;
 
-    /** @var  ContactForm */
+    /** @var ContactForm */
     public $contact_form;
 
     public function __construct(array $submitted_data, ContactForm $contact_form)
