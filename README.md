@@ -21,13 +21,13 @@ Please email me or message me on twitter https://twitter.com/web_dev_etc
 
 ## release history/change log
 
-v1.0.1 - small changes, typos, etc
-v1.0 - initial release (been using it on internal projects for a while, so it has been tested in the real world quite a bit)
+- v1.0.7 - small changes, typos, etc
+- v1.0 - initial release (been using it on internal projects for a while, so it has been tested in the real world quite a bit)
 
-## todo
+## things to do
 
 Please let me know if any of these features would be useful for you.
 
 - store submitted contact details in a database table (let me know if this is a feature that is useful?)
 - add additional anti spam/captcha options, as not everyone will want to use the invisible recaptcha
-- add <select> dropdowns. Is this someone people want on a contact form? please let me know
+- <strike>add <select> dropdowns. Is this someone people want on a contact form? please let me know</strike>
