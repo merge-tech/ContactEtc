@@ -15,6 +15,7 @@ use WebDevEtc\ContactEtc\Mail\ContactEtcMail;
 
 class CommentFeatureTest extends \Tests\TestCase
 {
+    /** Setup the config for test contact form pages. */
     public function setUp()
     {
         parent::setUp();
@@ -27,6 +28,7 @@ class CommentFeatureTest extends \Tests\TestCase
         });
     }
 
+    /** A basic test for checking the main contact form displays correctly */
     public function test_add_comment_form()
     {
 
@@ -52,10 +54,12 @@ class CommentFeatureTest extends \Tests\TestCase
 
     }
 
+    /** Run a bunch of tests that should result in successful contact form submission.
+     * Also tests that validation errors show up when required */
     public function test_submit_correct_contact_form_data()
     {
 
-
+        // we don't really need to send any emails
         \Mail::fake();
 
 
@@ -70,7 +74,6 @@ class CommentFeatureTest extends \Tests\TestCase
                 ]
             )
         );
-
 
         $this->withoutMiddleware(VerifyCsrfToken::class);
 

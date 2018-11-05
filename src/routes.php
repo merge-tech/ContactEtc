@@ -1,5 +1,8 @@
 <?php
 
+// The default (enabled by default) routes for the contact form.
+// You can change the options in /config/contactetc.php
+
 // you can disable this by setting the config('contactetc.include_default_routes') to false.
 // then you can manually add your own routes to your web.php file.
 
@@ -7,9 +10,9 @@
 use WebDevEtc\ContactEtc\ContactEtcServiceProvider;
 
 Route::group([
-
     'middleware' => ['web'],
     'prefix' => config('contactetc.contact_us_slug', 'contact-us')],
+
     function () {
 
         // default form. You must have an item in /app/ContactEtcForms/ that has its form name set to ContactEtcServiceProvider::DEFAULT_CONTACT_FORM_KEY for this to work!

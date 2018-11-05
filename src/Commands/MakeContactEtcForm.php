@@ -24,19 +24,50 @@ class MakeContactEtcForm extends GeneratorCommand
      * The type of class being generated.
      *
      * @var string
+     * @return null|mixed
      */
     protected $type = 'ContactEtcForm';
 
     public function handle()
     {
         if (!is_array(config("contactetc"))){
-            $this->error("The config file contactetc.php does not exist, or is not returning an array. Have you done the vendor:publish command? Please see the docs on https://webdevetc.com/contactetc");
+            $this->error("ERROR: The config file contactetc.php does not exist, or is not returning an array. Have you done the vendor:publish command? Please see the docs on https://webdevetc.com/contactetc");
             return;
         }
 
         // create the file:
         $return= parent::handle();
+        // output info messages:
+        $this->outputMessages($return);
+        return $return;
+    }
 
+    /**
+     * Get the stub file for the generator.
+     *
+     * @return string
+     */
+    protected function getStub()
+    {
+        return __DIR__ . '/ContactForm.stub';
+    }
+
+    /**
+     * Get the default namespace for the class.
+     *
+     * @param  string  $rootNamespace
+     * @return string
+     */
+    protected function getDefaultNamespace($rootNamespace)
+    {
+        return $rootNamespace.'\ContactEtcForms';
+    }
+
+    /**
+     * @param $return
+     */
+    protected function outputMessages($return)
+    {
         if (is_null($return)) {
             // success!
             // let's output some help/info
@@ -69,33 +100,8 @@ class MakeContactEtcForm extends GeneratorCommand
             $this->line("--------------------------");
             $this->warn("All done! Please scroll up and read the previous messages!");
             $this->line("Visit https://webdevetc.com/contactetc for docs/more help!");
-            $this->line("BTW - Need to hire a php dev? contact me https://webdevetc.com/ :)");
-
+            $this->line("BTW - Need to hire a php dev (EU/London based)? contact me https://webdevetc.com/ :)");
 
         }
-
-
-        return $return;
-    }
-
-    /**
-     * Get the stub file for the generator.
-     *
-     * @return string
-     */
-    protected function getStub()
-    {
-        return __DIR__ . '/ContactForm.stub';
-    }
-
-    /**
-     * Get the default namespace for the class.
-     *
-     * @param  string  $rootNamespace
-     * @return string
-     */
-    protected function getDefaultNamespace($rootNamespace)
-    {
-        return $rootNamespace.'\ContactEtcForms';
     }
 }

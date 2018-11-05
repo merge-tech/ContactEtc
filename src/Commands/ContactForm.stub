@@ -6,6 +6,7 @@ use WebDevEtc\ContactEtc\ContactPageConfigurator;
 use WebDevEtc\ContactEtc\ContactForm;
 use WebDevEtc\ContactEtc\FieldTypes\Checkbox;
 use WebDevEtc\ContactEtc\FieldTypes\Email;
+use WebDevEtc\ContactEtc\FieldTypes\Select;
 use WebDevEtc\ContactEtc\FieldTypes\RecaptchaV2Invisible;
 use WebDevEtc\ContactEtc\FieldTypes\Text;
 use WebDevEtc\ContactEtc\FieldTypes\Textarea;
@@ -25,11 +26,13 @@ you should only have this one file in /app/ContactEtcForms/
 If you have multiple forms please read the docs on my site to see what
 needs to be done to get it working correctly!
 
-If you need to generate another contact form, then please do
+If you need to generate another contact form, then please run the following command:
 php artisan make:contactetcform MyContactForm
 
-*** REMEMBER TO UPDATE config/contactetc.php *****
- * You must update that file, to look something like this:
+Then you must update the file created from that command (for example, app/ContactEtcForms/MainContactForm.php)
+with details about your contact form (who to send to, what fields are required, etc).
+
+Then in /config/contactetc.php, you must make it look something like this:
 
      [...]
      'contact_forms' => [
@@ -40,20 +43,22 @@ php artisan make:contactetcform MyContactForm
 If you don't have a contactetc.php file in /config, then
 please see the docs and go to the vendor:publish part!
 
+If you want to have more than one contact form please see the docs on https://webdevetc.com/contactetc
+
+Feel free to delete this comment once you have read it!
 */
 
-// enter a key for this contact form.
-// If you have just one form, it MUST be "main_contact_form"
-// If you have more than one form, then each one should be unique.
 
-return ContactForm::newContactForm("main_contact_form")
+    // set a alphanum (with underscore) name for this contact form (it must be unique, if you have 2+ contact forms):
+    // the  default form should be 'main_contact_form'.
+return ContactForm::newContactForm('main_contact_form')
+
     // what email address shall we send the contact form response to? (i.e. your email address)
     ->sendTo("UPDATEME@YOURSITE.com")
 
     // what is the human readable name of this form
     // This will appear on the emails that it sends you.
     ->humanReadableFormName("Main Contact Form")
-
 
 
     // Now add some fields!
@@ -67,6 +72,7 @@ return ContactForm::newContactForm("main_contact_form")
             // first field:
             Text::newNamed("your_name")// field name (<input name=$field_name>)
             ->setLabelName("Your name") // the <label>$label_name</label> value
+                ->max(100) // max length for their name
                 ->markAsRequiredField() // required in the Request validation + <input required >
 //                        ->setAsFromName() // if you want the email to set the 'from name' to this value
                 ->setAsReplyToName(), // if you want to email 'reply to name' to this value
@@ -98,6 +104,19 @@ return ContactForm::newContactForm("main_contact_form")
 
             // Here are some other field types you can use.
             // Just uncomment them and move it where you want
+
+            // select (dropdown) <select><option>...</option><option>...</option></select>
+            // Make sure you use ->setOptions()!
+//               Select::newNamed("job_position")
+//                  ->setLabelName("Your Job Position")
+//                  ->setDescription("Tell us a little bit about yourself")
+//                  ->setOptions([
+//
+//                      'other' => "Other",
+//                      'ceo' => "CEO",
+//                      'manager' => "Manager",
+//
+//                    ]),
 
             // checkbox - useful if you want the user to agree to some terms and conditions.
 //                    Checkbox::newNamed("agree_to_terms")           //<input type='checkbox'>

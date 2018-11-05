@@ -11,6 +11,7 @@ class MailTest extends \Tests\TestCase
 {
 
 
+    /** Setup the config for contact forms with test data */
     public function setUp()
     {
         parent::setUp();
@@ -31,14 +32,12 @@ class MailTest extends \Tests\TestCase
         $field_generator = new GetContactFormFieldData();
         $form = $field_generator->contactFormNamed('alt');
         $submitted = [
-
-            'your_name' =>"myname",
-            "email"=>"someemail@email.com",
-            "message"=>"Hello world message here",
-
-            ];
+            'your_name' => "myname",
+            "email" => "someemail@email.com",
+            "message" => "Hello world message here",
+        ];
         $mail = new \WebDevEtc\ContactEtc\Mail\ContactEtcMail($submitted, $form);
-        $this->assertArrayHasKey('your_name',$mail->submitted_data);
+        $this->assertArrayHasKey('your_name', $mail->submitted_data);
         $build_resp = $mail->build();
 
         // let's just double check the right type got returned.

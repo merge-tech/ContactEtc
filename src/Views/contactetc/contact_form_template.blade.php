@@ -9,7 +9,8 @@ __________
 @foreach($fields as $field)
 
 # {{$field->label}} <small style='color: #bbb'>{{$field->field_name}}</small>
-> {!! nl2br(e(trim(@$submitted_data[$field->field_name]) ?? "[no submitted data]" )) !!}
+
+> {!! $field->forEmailOutput(@$submitted_data[$field->field_name]) ?? "[no submitted data]"  !!}
 
 @endforeach
 

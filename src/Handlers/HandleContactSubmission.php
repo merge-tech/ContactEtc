@@ -38,6 +38,7 @@ class HandleContactSubmission implements HandlerInterface
         // but maybe it will be useful for other uses in the future.
         // any  validation errors should have been caught in the request rules
         // in the future we should check for any errors from the Mail object
+        // (todo)
 
         if (count($this->errors)) {
             return false;

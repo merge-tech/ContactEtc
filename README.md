@@ -21,6 +21,7 @@ Please email me or message me on twitter https://twitter.com/web_dev_etc
 
 ## release history/change log
 
+v1.0.1 - small changes, typos, etc
 v1.0 - initial release (been using it on internal projects for a while, so it has been tested in the real world quite a bit)
 
 ## todo

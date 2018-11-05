@@ -50,7 +50,7 @@ class ContactFormTest extends \Tests\TestCase
             // another field -
             Text::newNamed("your_location")// field name
             ->setLabelName("Location")
-                ->markAsOptional() // opposite of ->markAsRequiredField(). This isn't really needed, as all fields are optional unless ->markAsRequired() was set
+                ->markAsOptional()// opposite of ->markAsRequiredField(). This isn't really needed, as all fields are optional unless ->markAsRequired() was set
                 ->max(100), // max length
 
             // another field:
@@ -72,8 +72,8 @@ class ContactFormTest extends \Tests\TestCase
             // Do you want to use the invisible recaptcha from Google?
             // If so, please make sure that you have CAPTCHA_SITEKEY and CAPTCHA_SECRET set up in your .env (or in config/captcha.php)
             // and uncomment the next line
-                    \WebDevEtc\ContactEtc\FieldTypes\RecaptchaV2Invisible::spam("g-recaptcha-response") // do not change the field name!
-                       ->setLabelName("Spam protection"), // probably not needed, as it should be invisible!
+            \WebDevEtc\ContactEtc\FieldTypes\RecaptchaV2Invisible::spam()// do not change the field name!
+            ->setLabelName("Spam protection"), // probably not needed, as it should be invisible!
 
         ];
 
@@ -81,7 +81,7 @@ class ContactFormTest extends \Tests\TestCase
         $sendto = "UPDATE_THIS_TO_SOMETHING@example.com";
         $readableFormName = "Main Contact Form";
         $above = "above123";
-        $below="below987";
+        $below = "below987";
         $sendbutton = "send";
         $sendcss = "css_class";
 
@@ -110,9 +110,7 @@ class ContactFormTest extends \Tests\TestCase
         $this->assertTrue($contact_form->submit_button_css_classes == $sendcss);
 
 
-
     }
-
 
 
     public function test_contact_form_validates_with_error_for_incorrect_form()
@@ -129,13 +127,14 @@ class ContactFormTest extends \Tests\TestCase
     {
         $name = "with spaces";
         $this->expectException(\Exception::class);
-        $contact_form = ContactForm::newContactForm($name);
+        ContactForm::newContactForm($name);
     }
+
     public function test_contact_form_thows_error_if_form_name_not_valid_with_dashes()
     {
         $name = "with-dashes";
         $this->expectException(\Exception::class);
-        $contact_form = ContactForm::newContactForm($name);
+        ContactForm::newContactForm($name);
     }
 
     public function test_contact_form_validates_ok_for_correct_form()
@@ -150,14 +149,13 @@ class ContactFormTest extends \Tests\TestCase
             ->setAsReplyToName(), // if you want to email 'reply to name' to this value
 
 
-
         ];
 
         $name = "this_is_unique";
         $sendto = "UPDATE_THIS_TO_SOMETHING@example.com";
         $readableFormName = "Main Contact Form";
         $above = "above123";
-        $below="below987";
+        $below = "below987";
         $sendbutton = "send";
         $sendcss = "css_class";
 
@@ -168,7 +166,6 @@ class ContactFormTest extends \Tests\TestCase
             ->setFormViewVars([
                 'title' => "Our contact page",
                 'meta_desc' => "Get in touch with us!",
-//                    'sidebar_section_title'=>"Welcome to our contact page",
             ], [
                 'title' => "Our contact page",
                 'meta_desc' => "Get in touch with us!",
@@ -177,8 +174,7 @@ class ContactFormTest extends \Tests\TestCase
             ->setSubmitButtonTextAndClasses($sendbutton, $sendcss);
 
 
-$this->assertTrue(is_object($contact_form->validate()));
-
+        $this->assertTrue(is_object($contact_form->validate()));
 
 
     }

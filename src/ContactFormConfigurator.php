@@ -14,7 +14,9 @@ class ContactFormConfigurator
 {
 
     /**
-     * An array of the contact forms
+     * An array of the contact forms.
+     * Each item in this array is a ContactForm object, which contains info such as who to send the email to, what fields that contact form contains, etc.
+     *
      * @var array
      */
     protected $contact_forms = [];
@@ -71,9 +73,7 @@ class ContactFormConfigurator
     {
         // default is to use config('contactetc.contact_forms'). But you can pass an array to $load_configs
         $configs = $load_configs && is_array($load_configs) ? $load_configs : config("contactetc.contact_forms");
-
         self::checkConfigIsValidArray($configs);
-
         return $configs;
     }
 

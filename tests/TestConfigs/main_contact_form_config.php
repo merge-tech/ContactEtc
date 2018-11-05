@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This is a default set of config options for a contact form.
+ * Only to be used for TESTING
+ */
+
 namespace App\ContactEtcForms;
 
 use WebDevEtc\ContactEtc\ContactFormConfigurator;

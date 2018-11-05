@@ -8,7 +8,7 @@ interface FieldGeneratorInterface
     /**
      * Returns the requested ContactForm object
      *
-     * @param $contact_form_name
+     * @param $contactFieldId
      * @return ContactForm
      * @throws \Exception
      */

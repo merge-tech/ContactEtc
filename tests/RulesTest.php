@@ -12,6 +12,7 @@ class RulesTest extends \Tests\TestCase
 {
 
 
+    /** Setup the contact form config */
     public function setUp()
     {
         parent::setUp();
@@ -24,6 +25,7 @@ class RulesTest extends \Tests\TestCase
         });
     }
 
+    /** Make some basic tests that the ContactEtcSubmittedRequest request returns some rules */
     public function test_basic_rules()
     {
         $request = new \WebDevEtc\ContactEtc\Requests\ContactEtcSubmittedRequest();
@@ -34,7 +36,6 @@ class RulesTest extends \Tests\TestCase
 
         // while we are here, quickly test this:
         $this->assertTrue($request->authorize());
-
 
     }
 

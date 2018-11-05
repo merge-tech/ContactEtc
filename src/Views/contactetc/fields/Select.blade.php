@@ -1,19 +1,21 @@
-<div class="form-group textarea_field">
+<div class="form-group text_field">
     <label for="{{$field->field_name}}">{{$field->label}}</label>
 
-    <textarea
+
+    <select
             name='{{$field->field_name}}'
             class="form-control"
             id="{{$field->field_name}}"
-            aria-describedby="{{$field->field_name}}Helper"
-            rows='7'
-
 
             {{ $field->requiredTagAttribute() }}
-            {!! $field->placeholderTagAttribute() !!}
+            aria-describedby="{{$field->field_name}}Helper"
+    >
+        @foreach($field->getOptions() as $option_name=>$val)
+            <option value='{{$option_name}}' @if(old($field->field_name) == $option_name) selected @endif>{{$val}}</option>
+        @endforeach
 
+        </select>
 
-    >{{old($field->field_name,$field->default)}}</textarea>
     @include("contactetc::shared.error",['field'=>$field])
 
     @if($field->description)

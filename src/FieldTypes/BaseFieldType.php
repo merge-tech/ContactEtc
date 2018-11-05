@@ -336,4 +336,15 @@ abstract class BaseFieldType implements BaseFieldInterface
     }
 
 
+    /**
+     * Used if any processing is needed (such as converting from submitted <select> keys to their values)
+     * @param $submitted_data
+     * @return string
+     */
+    public function forEmailOutput($submitted_data)
+    {
+        return nl2br(e(trim($submitted_data)));
+    }
+
+
 }

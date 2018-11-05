@@ -21,7 +21,7 @@ class ContactEtcMail extends Mailable
      * array of the submitted POST data
      * @var array
      */
-    public $submitted_data;
+    public $submitted_data=[];
     /**
      * All details (such as who to send to, the contact form fields, etc) about the contact form
      *
@@ -69,7 +69,7 @@ class ContactEtcMail extends Mailable
     {
         // build the from_email_address email and reply to email details...
         // this is a bit bulky, but it is quite simple...
-        // todo: refactor a little.
+        // todo: refactor a little, the main loop is a too large.
 
         $from_email_address = $from_name = $reply_to_email_address = $reply_to_name = null;
 
@@ -105,7 +105,6 @@ class ContactEtcMail extends Mailable
                 }
             }
         }
-
 
 
         // ok, now we have gone through everything, do we have a $from_email_address (and maybe a $from_name)?

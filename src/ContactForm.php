@@ -20,6 +20,7 @@ class ContactForm
     public $contact_form_name;
     /**
      * A nice, human readable name
+     * Used in places such as in the default email message ("A contact form response from: $human_readable_form_name")
      * @var string
      */
     public $human_readable_form_name = 'Contact Form';
@@ -37,7 +38,10 @@ class ContactForm
      * Optional - you can leave these as two empty arrays.
      * @var array
      */
-    public $view_params = ['form_view_vars' => [], 'sent_view_vars' => []];
+    public $view_params = [
+        'form_view_vars' => [],
+        'sent_view_vars' => []
+    ];
     /**
      * What HTML to use above the contact form?
      * Anything you put here is not escaped.
@@ -60,6 +64,7 @@ class ContactForm
     /**
      * What css class should the submit button use?
      *
+     * by default it uses some Bootstrap classes
      * @var string
      */
     public $submit_button_css_classes = 'btn btn-primary btn-lg';
@@ -67,6 +72,8 @@ class ContactForm
     /**
      * an array of BasicFieldType objects (such as Text, Textarea, etc) - each one will be an item in the contact form.
      *
+     * If you have a form with a name field, email field, and message field then this array should have 3 items in it.
+     * Use $this->addFields()
      * @var array
      */
     protected $fields = [];
@@ -104,6 +111,7 @@ class ContactForm
 
     /**
      * This is a simple check that the bare minimum data is provided for this contact form to work.
+     * The form submission validation is NOT done here! Check the /src/Requests/ContactEtcSubmittedRequest.php file for that
      *
      * It will throw an exception if there is an error.
      * If all is ok, it returns $this.
@@ -117,38 +125,15 @@ class ContactForm
     public function validate()
     {
         // check it has everything set
+        // this does not validate any data, just that the ContactForm has the required fields.
 
         $required = [
             'contact_form_name' => ['required', 'string'],
             'send_to' => ['required', 'email'],
         ];
 
-        foreach ($required as $prop => $validateAgainst) {
-
-            foreach ($validateAgainst as $rule) {
-
-                switch ($rule) {
-
-                    case "required":
-                        if (!trim($this->$prop)) {
-                            throw new \Exception("\$this->$prop must be set, but is not set");
-                        }
-                        break;
-
-                    case 'string':
-                        if (!is_string($this->$prop)) {
-                            throw new \Exception("\$this->$prop must be a string, but it is not");
-                        }
-                        break;
-                    case 'email':
-                        if (!filter_var($this->$prop, FILTER_VALIDATE_EMAIL)) {
-                            throw new \Exception("\$this->$prop must be an email address, but it is not");
-                        }
-                        break;
-
-                };
-
-            }
+        foreach ($required as $fieldName => $validateAgainst) {
+            $this->checkValidationForField($validateAgainst, $fieldName);
         }
 
         // all is good, return this!
@@ -157,17 +142,23 @@ class ContactForm
     }
 
 
+    protected function checkValidationRule($rule)
+    {
+
+    }
 
 
     /**
      * Add an array of fields.
-     * Each item in the array should be a subclass of BaseFieldType (such as Text, Checkbox, etc)
+     * Each item in the array should be a subclass of BaseFieldType (such as Text, Checkbox, etc).
+     * This is enforced by the ->addField(BaseFieldType $type) call.
+     *
      * @param array $fields
      * @return $this
      */
     public function addFields(array $fields)
     {
-        $this->fields = $fields;
+        array_map([$this,'addField'], $fields);
         return $this;
     }
 
@@ -179,7 +170,6 @@ class ContactForm
      */
     public function addField(BaseFieldType $field)
     {
-
         $this->fields[] = $field;
         return $this;
     }
@@ -277,6 +267,34 @@ class ContactForm
         // what email address shall we send the contact form response to? (i.e. your email address)
         $this->send_to = $email;
         return $this;
+    }
+
+    /**
+     * @param $validateAgainst
+     * @param $fieldName
+     * @throws \Exception
+     */
+    protected function checkValidationForField($validateAgainst, $fieldName)
+    {
+        foreach ($validateAgainst as $rule) {
+            switch ($rule) {
+                case "required":
+                    if (!trim($this->$fieldName)) {
+                        throw new \Exception("\$this->$fieldName must be set, but is not set");
+                    }
+                    break;
+                case 'string':
+                    if (!is_string($this->$fieldName)) {
+                        throw new \Exception("\$this->$fieldName must be a string, but it is not");
+                    }
+                    break;
+                case 'email':
+                    if (!filter_var($this->$fieldName, FILTER_VALIDATE_EMAIL)) {
+                        throw new \Exception("\$this->$fieldName must be an email address, but it is not");
+                    }
+                    break;
+            };
+        }
     }
 
 
