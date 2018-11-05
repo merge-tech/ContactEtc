@@ -2,11 +2,11 @@
 
 ## Fully customisable - lots of options to suit your needs.
 
-- Set who to email to
+- Set who to email the completed contact form response to (i.e. your email address)
 - Customise the fields on your contact page(s), so you can have any number of fields. Fields are completely customisable
 - Includes anti spam with recaptcha
 - Supports multiple contact forms on one laravel app. Just copy/paste some route lines (and change them slightly) and it will be working straight away (see docs for details)
-- includes view files. @extends("layouts.app") so it *should* work with most laravel installations (if not, its a simple edit to do)
+- includes view files. It uses `@extends("layouts.app")` so it *should* work with most laravel installations (if not, its a simple edit to do). When you follow the installation guide it will copy all view files over to `/vendor/webdevetc/contactetc` anyway so you can easily edit as required.
 - includes tests.
 
 
@@ -14,6 +14,10 @@
 ## installation guide
 
 Please visit [the laravel contact form documentation here](https://webdevetc.com/contactetc/). The installation process only takes a couple of minutes, but there are a few things to be aware of.
+
+## questions/help
+
+Please email me via the contact form on my site, or catch me on twitter (I don't check twitter too often though) 
 
 ## issues, security issues
 
@@ -30,4 +34,4 @@ Please let me know if any of these features would be useful for you.
 
 - store submitted contact details in a database table (let me know if this is a feature that is useful?)
 - add additional anti spam/captcha options, as not everyone will want to use the invisible recaptcha
-- <strike>add <select> dropdowns. Is this someone people want on a contact form? please let me know</strike>
+- <strike>add <select> dropdowns. Is this someone people want on a contact form? please let me know</strike> (done in 1.0.7)
