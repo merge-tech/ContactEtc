@@ -9,7 +9,7 @@
 - includes view files. It uses `@extends("layouts.app")` so it *should* work with most laravel installations (if not, its a simple edit to do). When you follow the installation guide it will copy all view files over to `/vendor/webdevetc/contactetc` anyway so you can easily edit as required.
 - includes tests.
 
-Although building a contact form is very simple, it is a bit of a waste of time (and many, if not most, Laravel apps tend to have a contact form) - hopefully this can just save a bit of time. And also, I hope it is customisable enough to be of use! I'm not a fan of packages that don't let you easily modify how they work.
+Although building a contact form is very simple, it is a bit of a waste of time (and many Laravel web apps tend to have a contact form) - hopefully this can just save a bit of time. And also, I hope it is customisable enough to be of use! I'm not a fan of packages that don't let you easily modify how they work.
 
 
 ## installation guide
